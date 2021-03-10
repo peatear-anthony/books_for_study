@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -9,6 +10,7 @@ import time
 import unittest
 
 MAX_WAIT = 10
+load_dotenv(verbose=True)
 
 class NewVistorTest(StaticLiveServerTestCase):
     def setUp(self):
