@@ -24,4 +24,4 @@ sudo apt install nginx git python36 python3.6-venv
 ## Systemd service
 
 * see gunicorn.systemd.template.service
-* replace Domain with e.g, 192.168.3.18
+* replace Domain with e.g., 192.168.3.18
