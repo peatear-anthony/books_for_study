@@ -3,7 +3,6 @@ from fabric.contrib.files import append, exists
 from fabric.api import cd, env, local, run
 
 REPO_URL = 'https://github.com/peatear-anthony/books_for_study.git'
-'
 def deploy():
     site_folder = f'/home/{env.user}/sites/www.staging.petersroom.co/books_for_study/tdd_with_python'
     site_folder_parent = f'/home/{env.user}/sites/www.staging.petersroom.co/books_for_study'
