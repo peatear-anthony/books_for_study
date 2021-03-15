@@ -6,7 +6,7 @@ REPO_URL = 'https://github.com/peatear-anthony/books_for_study.git'
 
 
 def deploy():
-    site_folder = f'/home/{env.user}/sites/{env.host}'
+    site_folder = f'/home/{env.user}/sites/www.staging.petersroom.co/books_for_study/tdd_with_python'
     run(f'mkdir -p {site_folder}')
     with cd(site_folder):
         _get_latest_source()
