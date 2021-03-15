@@ -17,18 +17,19 @@ def deploy():
 
 
 def _get_latest_source():
+    cd(f'/home/{env.user}/sites/www.staging.petersroom.co/books_for_study')
     if exists('.git'):
         run('git fetch')
     else:
         run(f'git clone {REPO_URL} .')
-    current_commit = local("git log -n 1 --format==%H", capture=True)
+    current_commit = local("git log -n 1 --format=%H", capture=True)
     run(f'git reset --hard {current_commit}')
 
 
 def _update_virtualenv():
     if not exists('venv/bin/pip'):
         run(f'python3 -m venv venv')
-    run('./venv/bin/pip install -r requirementes.txt')
+    run('./venv/bin/pip install -r requirements.txt')
 
 
 def _create_or_udpate_dotenv():
