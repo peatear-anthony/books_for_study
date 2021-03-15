@@ -3,13 +3,15 @@ from fabric.contrib.files import append, exists
 from fabric.api import cd, env, local, run
 
 REPO_URL = 'https://github.com/peatear-anthony/books_for_study.git'
-
-
+'
 def deploy():
     site_folder = f'/home/{env.user}/sites/www.staging.petersroom.co/books_for_study/tdd_with_python'
+    site_folder_parent = f'/home/{env.user}/sites/www.staging.petersroom.co/books_for_study'
     run(f'mkdir -p {site_folder}')
-    with cd(site_folder):
+
+    with cd(site_folder_parent):
         _get_latest_source()
+    with cd(site_folder):
         _update_virtualenv()
         _create_or_udpate_dotenv()
         _udpate_static_files()
