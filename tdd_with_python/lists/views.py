@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from lists import models
+from lists.forms import EMPTY_LIST_ERROR
+
 
 # Create your views here.
 def home_page(request):
@@ -24,7 +26,7 @@ def view_list(request, list_id):
             return redirect(list_)
         except ValidationError:
             item.delete()
-            error = "You can't have an empty list item"
+            error = EMPTY_LIST_ERROR
     return render(request, 'list.html', {'list': list_, 'error': error})
 
 def new_list(request):
@@ -36,7 +38,7 @@ def new_list(request):
         item.save()
     except ValidationError:
         list_.delete()
-        error = "You can't have an empty list item"
+        error = EMPTY_LIST_ERROR
         return render(request, 'home.html', {"error": error})
     return redirect(list_)
 

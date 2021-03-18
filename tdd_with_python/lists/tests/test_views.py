@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 
 from lists.views import home_page
 from lists.models import Item, List
-
+from lists.forms import EMPTY_LIST_ERROR
 
 class NewListTest(TestCase):
 
@@ -26,7 +26,7 @@ class NewListTest(TestCase):
         response = self.client.post('/lists/new', data={'item_text': ''})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
-        expected_error = escape("You can't have an empty list item")
+        expected_error = escape(EMPTY_LIST_ERROR)
         self.assertContains(response, expected_error)
 
     def test_invalid_list_items_arent_saved(self):
@@ -103,5 +103,5 @@ class ListViewTest(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'list.html')
-        expected_error = escape("You can't have an empty list item")
+        expected_error = escape(EMPTY_LIST_ERROR)
         self.assertContains(response, expected_error)
