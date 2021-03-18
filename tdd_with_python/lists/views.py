@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from lists import models
-from lists.forms import EMPTY_LIST_ERROR
+from lists.forms import EMPTY_LIST_ERROR, ItemForm
 
 
 # Create your views here.
@@ -12,14 +12,14 @@ def home_page(request):
         return render(request, 'home.html')
 
     items = models.Item.objects.all()
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'form': ItemForm()})
 
 def view_list(request, list_id):
     list_ = models.List.objects.get(id=list_id)
     error = None
     if request.method == 'POST':
         try:
-            item = models.Item.objects.create(text=request.POST['item_text'],
+            item = models.Item.objects.create(text=request.POST['text'],
                                       list=list_)
             item.full_clean()
             item.save()
@@ -31,7 +31,7 @@ def view_list(request, list_id):
 
 def new_list(request):
     list_ = models.List.objects.create()
-    item = models.Item.objects.create(text=request.POST['item_text'],
+    item = models.Item.objects.create(text=request.POST['text'],
                                       list=list_)
     try:
         item.full_clean()
